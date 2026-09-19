@@ -216,6 +216,19 @@ body{
   100%{transform:translate(90px,110vh) rotate(280deg);opacity:0}
 }
 
+
+.time-toggle{position:fixed;z-index:4;top:14px;right:14px;border:1px solid rgba(255,255,255,.65);background:rgba(255,255,255,.72);color:var(--rose-dark);backdrop-filter:blur(10px);border-radius:999px;padding:8px 12px;font:700 .72rem "DM Sans",sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(70,35,60,.12)}
+.sun-rays{position:absolute;inset:-18px;display:grid;place-items:center;color:#ffe69a;font-size:118px;animation:raySpin 18s linear infinite;opacity:.75}@keyframes raySpin{to{transform:rotate(360deg)}}
+.birds{position:absolute;inset:0}.bird{position:absolute;font-family:serif;font-weight:700;font-size:28px;opacity:.42;animation:birdFly 18s linear infinite}.br1{top:20%;left:-8%;animation-delay:-3s}.br2{top:31%;left:-15%;font-size:20px;animation-delay:-11s}.br3{top:14%;left:-22%;font-size:18px;animation-delay:-16s}
+@keyframes birdFly{0%{transform:translateX(0) translateY(0) scale(.9);opacity:0}8%{opacity:.42}45%{transform:translateX(55vw) translateY(-28px) scale(1.05)}80%{opacity:.3}100%{transform:translateX(120vw) translateY(18px) scale(.85);opacity:0}}
+.fireflies,.fireworks{position:absolute;inset:0;opacity:0;transition:opacity .8s}.firefly{position:absolute;color:#fff5a8;font-size:10px;text-shadow:0 0 8px #fff2a0;animation:fireflyFloat 5s ease-in-out infinite}.ff1{left:8%;top:64%}.ff2{left:21%;top:78%;animation-delay:-3s}.ff3{left:38%;top:69%;animation-delay:-2s}.ff4{left:57%;top:82%;animation-delay:-4s}.ff5{left:73%;top:67%;animation-delay:-1.5s}.ff6{left:88%;top:77%;animation-delay:-3.5s}.ff7{left:47%;top:57%;animation-delay:-.5s}.ff8{left:93%;top:54%;animation-delay:-2.7s}
+@keyframes fireflyFloat{0%,100%{transform:translate(0,0);opacity:.15}50%{transform:translate(12px,-18px);opacity:1}}
+.burst{position:absolute;color:#fff0ba;font-size:34px;opacity:0;text-shadow:0 0 12px rgba(255,238,170,.9);animation:firework 3.6s ease-out infinite}.fw1{left:13%;top:10%}.fw2{right:14%;top:17%;animation-delay:-2.2s}.fw3{left:67%;top:7%;font-size:26px;animation-delay:-3s}.fw4{left:34%;top:16%;font-size:24px;animation-delay:-1.6s}
+@keyframes firework{0%,55%{opacity:0;transform:scale(.2)}62%{opacity:1;transform:scale(.75)}78%{opacity:.75;transform:scale(1.45)}100%{opacity:0;transform:scale(1.8)}}
+body.night{background:radial-gradient(circle at 50% 20%,rgba(91,72,143,.35),transparent 30%),radial-gradient(circle at 15% 70%,rgba(60,92,135,.25),transparent 30%),linear-gradient(180deg,#17162f 0%,#242345 48%,#292944 100%)}
+body.night .card{background:rgba(33,27,48,.88);border-color:rgba(255,255,255,.1);box-shadow:0 30px 90px rgba(0,0,0,.35);color:#f9eef3}body.night h1,body.night h2{color:#ffd9e4}body.night .sub,body.night .music-artist,body.night .music-note{color:#cbb8c2}body.night .note{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)}body.night .music{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.1)}body.night .stars{opacity:.95}body.night .sun{opacity:0;transform:translateY(-30px) scale(.65)}body.night .moon{opacity:1}body.night .fireflies,body.night .fireworks{opacity:1}body.night .birds{opacity:.12}body:not(.night) .moon,body:not(.night) .fireflies,body:not(.night) .fireworks{opacity:0}body.night .time-toggle{background:rgba(35,31,54,.82);color:#ffe5ed}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
 #app{
   position:relative;
   z-index:1;
@@ -363,37 +376,15 @@ p{
   margin-bottom:10px;
 }
 
-.album{
-  width:48px;
-  height:48px;
-  flex:none;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  color:white;
-  font-size:1.25rem;
-  background:linear-gradient(145deg,#d95779,#8e304e);
-  box-shadow:0 7px 14px rgba(217,87,121,.2);
-}
-
-.music-title{
-  font-weight:700;
-  font-size:.9rem;
-}
-
-.music-artist{
-  color:var(--muted);
-  font-size:.76rem;
-  margin-top:2px;
-}
-
-.local-audio{
-  width:100%;
-  height:44px;
-  margin-top:4px;
-  border-radius:12px;
-  accent-color:var(--rose);
-}
+.record-wrap{width:70px;height:70px;flex:none;display:grid;place-items:center}
+.record{width:64px;height:64px;border-radius:50%;position:relative;background:repeating-radial-gradient(circle,#25202a 0 2px,#17141b 2.5px 4px);box-shadow:0 7px 15px rgba(40,20,30,.2);animation:spinRecord 2.6s linear infinite;animation-play-state:paused}
+.record:before{content:"";position:absolute;inset:9px;border-radius:50%;background:radial-gradient(circle,#e98aa2 0 8%,#c74d70 9% 40%,#f2b1c1 41% 45%,#c74d70 46% 100%)}
+.record-label{position:absolute;z-index:2;inset:22px;border-radius:50%;display:grid;place-items:center;color:white;font-size:13px;background:#b94265}
+.record-hole{position:absolute;z-index:3;width:6px;height:6px;border-radius:50%;left:29px;top:29px;background:#fff2f5}
+.record-wrap.playing .record{animation-play-state:running}
+@keyframes spinRecord{to{transform:rotate(360deg)}}
+.track-info{min-width:0}.music-title{font-weight:700;font-size:.9rem}.music-artist{color:var(--muted);font-size:.76rem;margin-top:2px}.music-note{color:#b38390;font-size:.67rem;margin-top:5px}
+.audio-controls{display:flex;align-items:center;gap:10px;margin-top:9px}.play-song{width:44px;height:44px;flex:none;border:0;border-radius:50%;background:var(--rose);color:white;font-size:15px;cursor:pointer;box-shadow:0 8px 16px rgba(217,87,121,.22)}.audio-info{flex:1;min-width:0}.audio-status{color:#a27883;font-size:.68rem;margin-bottom:4px}#songProgress{width:100%;accent-color:var(--rose);cursor:pointer}
 
 .photo{
   width:100%;
@@ -474,8 +465,11 @@ p{
 
 <div id="sky" aria-hidden="true">
   <div class="stars"></div>
-  <div class="sun"></div>
+  <div class="sun"><span class="sun-rays">☼</span></div>
   <div class="moon"></div>
+  <div class="birds"><span class="bird br1">⌁</span><span class="bird br2">⌁</span><span class="bird br3">⌁</span></div>
+  <div class="fireflies"><span class="firefly ff1">✦</span><span class="firefly ff2">✦</span><span class="firefly ff3">✦</span><span class="firefly ff4">✦</span><span class="firefly ff5">✦</span><span class="firefly ff6">✦</span><span class="firefly ff7">✦</span><span class="firefly ff8">✦</span></div>
+  <div class="fireworks"><span class="burst fw1">✦</span><span class="burst fw2">✦</span><span class="burst fw3">✧</span><span class="burst fw4">✦</span></div>
   <div class="cloud c1"></div>
   <div class="cloud c2"></div>
 
@@ -499,6 +493,7 @@ p{
 </div>
 
 <div id="hearts"></div>
+<button class="time-toggle" id="timeToggle" type="button" onclick="toggleDayNight()" aria-label="Switch to night mode"><span id="timeIcon">☀️</span><span id="timeText">Day</span></button>
 
 <main id="app">
   <div class="card">
@@ -520,18 +515,20 @@ p{
 
       <div class="music">
         <div class="music-top">
-          <div class="album">♫</div>
-          <div>
+          <div class="record-wrap" id="recordWrap" aria-hidden="true">
+            <div class="record"><div class="record-label">♡</div><div class="record-hole"></div></div>
+          </div>
+          <div class="track-info">
             <div class="music-title">Rearrange My World</div>
             <div class="music-artist">Daniel Caesar &amp; Rex Orange County</div>
+            <div class="music-note">A little song for this little moment ♡</div>
           </div>
         </div>
-
-        <!-- Local MP3 audio file: put your song file in the same folder and name it "song.mp3" -->
-        <audio class="local-audio" controls preload="metadata">
-          <source src="song.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
+        <audio id="loveSong" preload="metadata"><source src="song.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        <div class="audio-controls">
+          <button class="play-song" id="playSong" onclick="toggleSong()" aria-label="Play song">▶</button>
+          <div class="audio-info"><div class="audio-status" id="audioStatus">Tap play to listen ♡</div><input id="songProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Song progress"></div>
+        </div>
       </div>
 
       <p class="tiny">Take your time. There's no rush. ♡</p>
@@ -691,19 +688,19 @@ function thinkAnswer(){
 }
 
 /* Floating hearts */
-const heartBox = document.getElementById("hearts");
-const symbols = ["♡","♥","💗","💕","💖","✦"];
+const heartBox=document.getElementById("hearts"),symbols=["♡","♥","💗","💕","💖","✦"];
+for(let i=0;i<18;i++){const el=document.createElement("span");el.className="heart";el.textContent=symbols[Math.floor(Math.random()*symbols.length)];el.style.left=Math.random()*100+"vw";el.style.fontSize=(12+Math.random()*18)+"px";el.style.animationDuration=(9+Math.random()*10)+"s";el.style.animationDelay=(-Math.random()*15)+"s";heartBox.appendChild(el)}
 
-for(let i=0;i<18;i++){
-  const el = document.createElement("span");
-  el.className = "heart";
-  el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
-  el.style.left = Math.random()*100 + "vw";
-  el.style.fontSize = (12 + Math.random()*18) + "px";
-  el.style.animationDuration = (9 + Math.random()*10) + "s";
-  el.style.animationDelay = (-Math.random()*15) + "s";
-  heartBox.appendChild(el);
-}
+/* Animated MP3 player */
+const loveSong=document.getElementById("loveSong"),playSong=document.getElementById("playSong"),songProgress=document.getElementById("songProgress"),audioStatus=document.getElementById("audioStatus"),recordWrap=document.getElementById("recordWrap");
+function toggleSong(){if(loveSong.paused){loveSong.play().then(()=>{recordWrap.classList.add("playing");playSong.textContent="❚❚";playSong.setAttribute("aria-label","Pause song");audioStatus.textContent="Playing for you ♡"}).catch(()=>audioStatus.textContent="Put song.mp3 beside index.html")}else{loveSong.pause();recordWrap.classList.remove("playing");playSong.textContent="▶";playSong.setAttribute("aria-label","Play song");audioStatus.textContent="Paused ♡"}}
+loveSong.addEventListener("timeupdate",()=>{if(Number.isFinite(loveSong.duration)&&loveSong.duration>0)songProgress.value=loveSong.currentTime/loveSong.duration*100});
+songProgress.addEventListener("input",()=>{if(Number.isFinite(loveSong.duration)&&loveSong.duration>0)loveSong.currentTime=songProgress.value/100*loveSong.duration});
+loveSong.addEventListener("ended",()=>{recordWrap.classList.remove("playing");playSong.textContent="▶";playSong.setAttribute("aria-label","Play song");audioStatus.textContent="Play it again? ♡";songProgress.value=0});
+
+/* Day / night */
+let isNight=false;
+function toggleDayNight(){isNight=!isNight;document.body.classList.toggle("night",isNight);document.getElementById("timeIcon").textContent=isNight?"🌙":"☀️";document.getElementById("timeText").textContent=isNight?"Night":"Day";document.getElementById("timeToggle").setAttribute("aria-label",isNight?"Switch to day mode":"Switch to night mode")}
 
 renderDots();
 </script>
