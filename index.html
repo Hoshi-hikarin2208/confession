@@ -34,9 +34,11 @@ body{
   min-height:100vh;
   overflow:hidden;
   background:
-    radial-gradient(circle at 10% 10%, #ffd9e3 0, transparent 34%),
-    radial-gradient(circle at 90% 85%, #ffe0e8 0, transparent 36%),
-    linear-gradient(145deg,#fff8fa,#fff1f4);
+    radial-gradient(circle at 50% 8%, rgba(255,241,190,.72) 0 7%, transparent 24%),
+    radial-gradient(circle at 12% 18%, rgba(255,214,231,.72) 0 8%, transparent 30%),
+    radial-gradient(circle at 88% 72%, rgba(208,224,255,.55) 0 9%, transparent 30%),
+    linear-gradient(180deg,#ffd9e5 0%,#f7dff0 38%,#d9cbed 72%,#b8afd0 100%);
+  position:relative;
 }
 
 #hearts{
@@ -60,6 +62,158 @@ body{
   12%{opacity:.45}
   85%{opacity:.28}
   100%{transform:translateY(-115vh) rotate(18deg);opacity:0}
+}
+
+
+/* Romantic animated background */
+#sky{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.sun,.moon{
+  position:absolute;
+  border-radius:50%;
+  animation:skyFloat 7s ease-in-out infinite;
+}
+
+.sun{
+  width:92px;
+  height:92px;
+  right:8%;
+  top:8%;
+  background:radial-gradient(circle,#fff8c9 0 45%,#ffd98b 65%,rgba(255,217,139,0) 72%);
+  filter:blur(.2px) drop-shadow(0 0 28px rgba(255,220,120,.7));
+}
+
+.moon{
+  width:78px;
+  height:78px;
+  left:8%;
+  top:10%;
+  background:#fffdf1;
+  box-shadow:0 0 30px rgba(255,250,218,.75);
+  animation-delay:-3s;
+}
+
+.moon:after{
+  content:"";
+  position:absolute;
+  width:78px;
+  height:78px;
+  left:23px;
+  top:-9px;
+  border-radius:50%;
+  background:#e5d5e8;
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.9) 1px,transparent 1.5px),
+    radial-gradient(circle,rgba(255,255,255,.65) 1px,transparent 1.5px);
+  background-size:74px 86px,121px 113px;
+  background-position:10px 12px,35px 48px;
+  opacity:.55;
+  animation:twinkle 4s ease-in-out infinite alternate;
+}
+
+.cloud{
+  position:absolute;
+  width:180px;
+  height:42px;
+  border-radius:999px;
+  background:rgba(255,255,255,.24);
+  filter:blur(1px);
+  animation:cloudDrift 28s linear infinite;
+}
+
+.cloud:before,.cloud:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  background:inherit;
+}
+
+.cloud:before{width:70px;height:70px;left:28px;bottom:5px}
+.cloud:after{width:90px;height:90px;right:28px;bottom:0}
+
+.cloud.c1{top:22%;left:-220px}
+.cloud.c2{top:54%;left:-300px;animation-duration:36s;animation-delay:-16s;opacity:.55}
+
+.butterflies,.flowers{
+  position:absolute;
+  inset:0;
+}
+
+.butterfly{
+  position:absolute;
+  font-size:22px;
+  opacity:.72;
+  animation:butterflyFloat 12s ease-in-out infinite;
+  filter:drop-shadow(0 5px 8px rgba(110,65,100,.16));
+}
+
+.butterfly.b1{left:7%;top:43%;animation-delay:-2s}
+.butterfly.b2{right:8%;top:31%;font-size:18px;animation-delay:-7s}
+.butterfly.b3{left:18%;bottom:14%;font-size:16px;animation-delay:-5s}
+
+.flower{
+  position:absolute;
+  bottom:-8px;
+  font-size:42px;
+  opacity:.8;
+  transform-origin:bottom center;
+  animation:sway 4s ease-in-out infinite;
+  filter:drop-shadow(0 5px 6px rgba(80,45,65,.14));
+}
+
+.flower.f1{left:2%;animation-delay:-1s}
+.flower.f2{left:12%;font-size:31px;animation-delay:-3s}
+.flower.f3{right:5%;font-size:46px;animation-delay:-2s}
+.flower.f4{right:17%;font-size:30px;animation-delay:-4s}
+
+.petal{
+  position:absolute;
+  top:-40px;
+  font-size:17px;
+  opacity:0;
+  animation:petalFall 11s linear infinite;
+}
+.petal.p1{left:20%;animation-delay:-2s}
+.petal.p2{left:42%;animation-delay:-7s}
+.petal.p3{left:68%;animation-delay:-4s}
+.petal.p4{left:86%;animation-delay:-9s}
+
+@keyframes skyFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+@keyframes twinkle{
+  from{opacity:.32}
+  to{opacity:.75}
+}
+@keyframes cloudDrift{
+  from{transform:translateX(0)}
+  to{transform:translateX(calc(100vw + 360px))}
+}
+@keyframes butterflyFloat{
+  0%,100%{transform:translate(0,0) rotate(-5deg)}
+  30%{transform:translate(35px,-28px) rotate(8deg)}
+  60%{transform:translate(75px,8px) rotate(-8deg)}
+}
+@keyframes sway{
+  0%,100%{transform:rotate(-3deg)}
+  50%{transform:rotate(4deg) translateY(-2px)}
+}
+@keyframes petalFall{
+  0%{transform:translate(0,-40px) rotate(0);opacity:0}
+  12%{opacity:.65}
+  100%{transform:translate(90px,110vh) rotate(280deg);opacity:0}
 }
 
 #app{
@@ -317,6 +471,32 @@ p{
 </head>
 
 <body>
+
+<div id="sky" aria-hidden="true">
+  <div class="stars"></div>
+  <div class="sun"></div>
+  <div class="moon"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+
+  <div class="butterflies">
+    <span class="butterfly b1">🦋</span>
+    <span class="butterfly b2">🦋</span>
+    <span class="butterfly b3">🦋</span>
+  </div>
+
+  <div class="flowers">
+    <span class="flower f1">🌷</span>
+    <span class="flower f2">🌸</span>
+    <span class="flower f3">🌷</span>
+    <span class="flower f4">🌼</span>
+  </div>
+
+  <span class="petal p1">🌸</span>
+  <span class="petal p2">🌷</span>
+  <span class="petal p3">🌸</span>
+  <span class="petal p4">🌷</span>
+</div>
 
 <div id="hearts"></div>
 
